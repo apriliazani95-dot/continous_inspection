@@ -35,13 +35,14 @@ jobs:
 
     - name: Build and analyze
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=apriliazani95-dot \
+          -Dsonar.projectKey=apriliazani95-dot_continous_inspection \
           -Dsonar.organization=apriliazani95-dot \
-          -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
-          -Dsonar.token=${{ env.SONAR_TOKEN }}
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.token=${SONAR_TOKEN}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
